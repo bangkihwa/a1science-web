@@ -1,11 +1,874 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>에이원과학학원</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진명여고 경희대 계열별 이수 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .guide-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .guide-section h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .guide-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .guide-item {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .major-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        .major-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .major-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .major-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .major-subtitle {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .year-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 50px;
+        }
+        
+        .year-item::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #4facfe;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #4facfe;
+        }
+        
+        .year-label {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .subjects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .subject {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .core {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            position: relative;
+        }
+        
+        .core::after {
+            content: '⭐';
+            margin-left: 5px;
+        }
+        
+        .recommended {
+            background: linear-gradient(135deg, #4ecdc4 0%, #7bdcdb 100%);
+            color: white;
+        }
+        
+        .basic {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            color: #2d3748;
+        }
+        
+        .icon {
+            font-size: 1.5rem;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .warning-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .story-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .story-section h3 {
+            color: #2d3748;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .story-example {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #4facfe;
+        }
+        
+        @media (max-width: 768px) {
+            .major-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>목동 에이원과학학원</h1>
-  <p>GitHub Pages 배포 완료! 🎉</p>
+    <div class="container">
+        <div class="header">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+                <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-family: 'Arial Black', sans-serif; font-size: 1.5rem; font-weight: 900; color: #000; text-align: center;">
+                        AONE<br>
+                        <span style="font-size: 1rem; letter-spacing: 3px;">SCIENCE</span>
+                    </div>
+                </div>
+            </div>
+            <h1>🎓 진명여고 이과계열 진학별 이수 완전 가이드</h1>
+            <p>2028학년도 입시 대비 · 계열별 핵심/권장과목 완벽 로드맵</p>
+        </div>
+        
+        <div class="content">
+            <div class="guide-section">
+                <h2>📋 핵심 가이드라인</h2>
+                <div class="guide-list">
+                    <div class="guide-item">
+                        <strong>🎯 계열별 가이드라인 무조건 준수!</strong><br>
+                        지원 학과와 연계된 과목 선택 필수
+                    </div>
+                    <div class="guide-item">
+                        <strong>📝 학생부 세특 연결성 강조</strong><br>
+                        구체적 활동/역량/진로 연결성 기록
+                    </div>
+                    <div class="guide-item">
+                        <strong>📚 단계적 이수 계획</strong><br>
+                        일반선택 → 진로·융합선택 심화까지
+                    </div>
+                    <div class="guide-item">
+                        <strong>💭 선택 이유 명확화</strong><br>
+                        "왜 이 과목을 선택했고, 내 미래에 어떻게 연결되는가?"
+                    </div>
+                </div>
+            </div>
+            
+            <div class="major-grid">
+                <!-- 물리학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">⚛️</span>
+                        물리학 계열
+                    </div>
+                    <div class="major-subtitle">물리학과, 응용물리학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject recommended">화학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">역학과에너지 (핵심)</span>
+                                <span class="subject recommended">물질과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">전자기와양자 (핵심)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 기계공학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">⚙️</span>
+                        기계공학 계열
+                    </div>
+                    <div class="major-subtitle">기계공학부, 기계항공공학부</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">역학과에너지 (핵심)</span>
+                                <span class="subject recommended">물질과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">전자기와양자 (핵심)</span>
+                                <span class="subject recommended">화학반응의세계 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 전기전자 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">⚡</span>
+                        전기·전자 계열
+                    </div>
+                    <div class="major-subtitle">전자공학과, 반도체공학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">역학과에너지 (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">전자기와양자 (핵심)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 건설건축 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🏗️</span>
+                        건설·건축 계열
+                    </div>
+                    <div class="major-subtitle">건축공학과, 토목공학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject basic">선택없음</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">역학과에너지 (핵심)</span>
+                                <span class="subject core">물질과에너지 (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject basic">선택없음</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 화학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🧪</span>
+                        화학 계열
+                    </div>
+                    <div class="major-subtitle">화학과, 응용화학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject recommended">물리학Ⅰ (권장)</span>
+                                <span class="subject recommended">생명과학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물질과에너지 (핵심)</span>
+                                <span class="subject recommended">역학과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학반응의세계 (핵심)</span>
+                                <span class="subject recommended">전자기와양자 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 재료화공 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🔬</span>
+                        재료·화공 계열
+                    </div>
+                    <div class="major-subtitle">신소재공학과, 화학공학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물질과에너지 (핵심)</span>
+                                <span class="subject recommended">역학과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학반응의세계 (핵심)</span>
+                                <span class="subject recommended">전자기와양자 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 생명과학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🧬</span>
+                        생명과학·환경·식품 계열
+                    </div>
+                    <div class="major-subtitle">생물학과, 식품영양학과, 환경공학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생명과학Ⅰ (핵심)</span>
+                                <span class="subject recommended">물리학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">세포와물질대사 (핵심)</span>
+                                <span class="subject recommended">물질과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생물의유전 (핵심)</span>
+                                <span class="subject recommended">화학반응의세계 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 의학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🩺</span>
+                        의학 계열
+                    </div>
+                    <div class="major-subtitle">의예과, 의학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생명과학Ⅰ (핵심)</span>
+                                <span class="subject recommended">물리학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물질과에너지 (핵심)</span>
+                                <span class="subject core">세포와물질대사 (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학반응의세계 (핵심)</span>
+                                <span class="subject core">생물의유전 (핵심)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 지구과학천문 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🌍</span>
+                        지구과학·천문 계열
+                    </div>
+                    <div class="major-subtitle">지구과학과, 천문학과, 우주과학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                                <span class="subject core">지구과학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">지구시스템과학 (핵심)</span>
+                                <span class="subject recommended">역학과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">행성우주과학 (핵심)</span>
+                                <span class="subject recommended">전자기와양자 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 한의학치의학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🌿</span>
+                        한의학·치의학 계열
+                    </div>
+                    <div class="major-subtitle">한의예과, 치의예과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생명과학Ⅰ (핵심)</span>
+                                <span class="subject recommended">물리학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">세포와물질대사 (핵심)</span>
+                                <span class="subject recommended">물질과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생물의유전 (핵심)</span>
+                                <span class="subject recommended">화학반응의세계 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 약학 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">💊</span>
+                        약학 계열
+                    </div>
+                    <div class="major-subtitle">약학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생명과학Ⅰ (핵심)</span>
+                                <span class="subject recommended">물리학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물질과에너지 (핵심)</span>
+                                <span class="subject core">세포와물질대사 (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">화학반응의세계 (핵심)</span>
+                                <span class="subject core">생물의유전 (핵심)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 간호보건 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">🏥</span>
+                        간호·보건 계열
+                    </div>
+                    <div class="major-subtitle">간호학과, 보건학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject recommended">화학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생명과학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">세포와물질대사 (핵심)</span>
+                                <span class="subject recommended">물질과에너지 (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">생물의유전 (핵심)</span>
+                                <span class="subject recommended">화학반응의세계 (권장)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 정보컴퓨터 계열 -->
+                <div class="major-card">
+                    <div class="major-title">
+                        <span class="icon">💻</span>
+                        정보·컴퓨터 계열
+                    </div>
+                    <div class="major-subtitle">컴퓨터공학과, AI학과, 소프트웨어학과</div>
+                    <div class="timeline">
+                        <div class="year-item">
+                            <div class="year-label">1학년</div>
+                            <div class="subjects">
+                                <span class="subject basic">통합과학</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject recommended">지구과학Ⅰ (권장)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">2학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">물리학Ⅰ (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 1학기</div>
+                            <div class="subjects">
+                                <span class="subject core">역학과에너지 (핵심)</span>
+                            </div>
+                        </div>
+                        <div class="year-item">
+                            <div class="year-label">3학년 2학기</div>
+                            <div class="subjects">
+                                <span class="subject core">전자기와양자 (핵심)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>💡 스토리텔링 기반 학습 포트폴리오의 중요성</h3>
+                <p>단순히 과목을 이수했다는 "스펙"에 그치지 않고, 각 과목을 통해 <strong>무엇을 배웠고, 어떻게 성장했으며, 자신의 진로와 어떤 연관이 있었는지</strong>까지 '스토리텔링'으로 연결되는 학업/진로 포트폴리오 설계가 매우 중요합니다.</p>
+                
+                <div class="story-example">
+                    <h4>🧬 생명과학 계열 진학 성공 사례</h4>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li><strong>일반생명과학 + 심화생명과학 이수</strong></li>
+                        <li><strong>해당 과목 세특에 바이오 실험 참여 기록</strong></li>
+                        <li><strong>자체 과학탐구보고서 작성</strong></li>
+                        <li><strong>동아리 활동까지 연계해 기록</strong></li>
+                    </ul>
+                    <p style="margin-top: 15px; font-weight: bold; color: #4facfe;">→ 이러한 체계적 접근으로 합격 가능성이 월등히 높아집니다!</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ 목동에이원과학학원과 함께하는 성공 전략</h3>
+                <p><strong>"왜 이 과목을 선택했는가?"</strong>가 서류평가, 정성평가에서 매우 크게 작용합니다.</p>
+                <p>체계적인 과목 선택과 학습 포트폴리오 설계로 여러분의 꿈을 현실로 만들어드리겠습니다.</p>
+                <div style="margin-top: 20px; font-size: 1.1rem;">
+                    📞 <strong>상담 문의: 목동에이원과학학원</strong><br>
+                    📍 서울시 양천구 목동<br>
+                    ⏰ 평일 14:00-22:00, 토요일 10:00-18:00
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
